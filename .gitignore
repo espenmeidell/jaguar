@@ -1,0 +1,4 @@
+trips/
+node_modules/
+.vscode/
+env/
