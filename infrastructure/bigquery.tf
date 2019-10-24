@@ -7,6 +7,9 @@ resource "google_bigquery_dataset" "cartrips" {
   dataset_id    = "cartrips"
   friendly_name = "Car trips"
   location      = "EU"
+  labels = {
+    terraform = "true"
+  }
 }
 
 resource "google_bigquery_table" "waypoints" {
@@ -15,6 +18,9 @@ resource "google_bigquery_table" "waypoints" {
   time_partitioning {
     type  = "DAY"
     field = "timestamp"
+  }
+  labels = {
+    terraform = "true"
   }
 
   schema = <<EOF
@@ -31,12 +37,12 @@ resource "google_bigquery_table" "waypoints" {
   },
   {
     "name": "latitude",
-    "type": "FLOAT64",
+    "type": "FLOAT",
     "mode": "REQUIRED"
   },
   {
     "name": "longitude",
-    "type": "FLOAT64",
+    "type": "FLOAT",
     "mode": "REQUIRED"
   }
 ]
@@ -46,6 +52,9 @@ EOF
 resource "google_bigquery_table" "trips" {
   dataset_id = "${google_bigquery_dataset.cartrips.dataset_id}"
   table_id   = "trips"
+  labels = {
+    terraform = "true"
+  }
 
   schema = <<EOF
 [
@@ -56,17 +65,17 @@ resource "google_bigquery_table" "trips" {
   },
   {
     "name": "averageEnergyConsumption",
-    "type": "FLOAT64",
+    "type": "FLOAT",
     "mode": "REQUIRED"
   },
   {
     "name": "averageSpeed",
-    "type": "FLOAT64",
+    "type": "FLOAT",
     "mode": "REQUIRED"
   },
   {
     "name": "distance",
-    "type": "INT64",
+    "type": "INTEGER",
     "mode": "REQUIRED"
   },
   {
@@ -91,22 +100,22 @@ resource "google_bigquery_table" "trips" {
   },
   {
     "name": "startLatitude",
-    "type": "FLOAT64",
+    "type": "FLOAT",
     "mode": "REQUIRED"
   },
   {
     "name": "startLongitude",
-    "type": "FLOAT64",
+    "type": "FLOAT",
     "mode": "REQUIRED"
   },
     {
     "name": "endLatitude",
-    "type": "FLOAT64",
+    "type": "FLOAT",
     "mode": "REQUIRED"
   },
   {
     "name": "endLongitude",
-    "type": "FLOAT64",
+    "type": "FLOAT",
     "mode": "REQUIRED"
   }
 ]
