@@ -1,6 +1,7 @@
 provider "google" {
   project = "gcp-certification-254910"
-  region  = "europe-west3"
+  region  = "europe-west1"
+  zone    = "europe-west1-b"
 }
 
 resource "google_bigquery_dataset" "cartrips" {
